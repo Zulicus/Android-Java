@@ -24,13 +24,19 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(this::onClick);
 
         String dogName = sampleObject.INSTANCE.getDogName();
+        Log.d("test","onCreate: "+dogName);
+        sampleObject.INSTANCE.setDogName("Nero");//Does nothing
+        Log.d("test","onCreate: "+sampleObject.INSTANCE.runKot());
 
+        CoroSample.Companion.coro();
+        Log.d("test","onCreate: someother stuff");
 
     }
 
     private void onClick(View view) {
         Log.d("test","onClick: Click");
 
+        CoroSample.Companion.setWorld(textView);
 
     }
 }
