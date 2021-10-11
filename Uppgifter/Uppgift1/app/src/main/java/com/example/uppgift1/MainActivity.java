@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView galaxyImage;
     TextView posText;
     SensorManager sensorManager;
-    int counter=0;
+    int counter = 0;
+    float spin =360;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_FASTEST);
+        sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
     }
 
     //Actual Code
@@ -53,9 +54,16 @@ public class MainActivity extends AppCompatActivity {
         float[] values = sensorEvent.values;
         float X_Axis = values[0];
         float Y_Axis = values[1];
+        float Z_Axis = values[2];
         //Calculates the angle
         double angle = Math.atan2(X_Axis, Y_Axis) / (Math.PI / 180);
-        galaxyImage.setRotation((float) angle);
+
+        if(spin>0){
+            spin--;
+        }else{
+            spin=360;
+        }
+        galaxyImage.setRotation(spin);
         posText.setText("Angle: " + (int) angle + "°");
         //Gets the Width and Height of the screen
         Display display = getWindowManager().getDefaultDisplay();
@@ -90,16 +98,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void vibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (counter==20){
-            counter=0;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(1, VibrationEffect.DEFAULT_AMPLITUDE));
+        if (counter == 1) {
+            counter = 0;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(1, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                //deprecated in API 26
+                vibrator.vibrate(1);
+            }
         } else {
-            //deprecated in API 26
-            vibrator.vibrate(1);
-        }
-    }else{
-        counter++;
+            counter++;
         }
     }
 }

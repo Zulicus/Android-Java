@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Lektion5</string>
+    <string name="MainBtn">Go to Second</string>
+    <string name="SecondBtn" >Go to Main</string>
+</resources>
