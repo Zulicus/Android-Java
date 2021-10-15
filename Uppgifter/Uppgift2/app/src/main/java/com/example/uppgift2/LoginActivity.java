@@ -1,22 +1,21 @@
 package com.example.uppgift2;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
-    boolean loggedIn;
-    Button loginBtn;
+//Main Start Activity
 
+public class LoginActivity extends AppCompatActivity {
+    boolean loggedIn = false;
+    Button loginBtn;
+    SharedPreferences sharedPreferences;
     Switch switchOneOne;
     Switch switchOneTwo;
     Switch switchOneThree;
@@ -26,12 +25,15 @@ public class LoginActivity extends AppCompatActivity {
     Switch switchThreeOne;
     Switch switchThreeTwo;
     Switch switchThreeThree;
+    //Default Password
     boolean[] password = new boolean[]{false, false, false, false, false, false, false, false, false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Initiate global variables
+        sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         switchOneOne = findViewById(R.id.switchOneOne);
         switchOneTwo = findViewById(R.id.switchOneTwo);
         switchOneThree = findViewById(R.id.switchOneThree);
@@ -41,92 +43,90 @@ public class LoginActivity extends AppCompatActivity {
         switchThreeOne = findViewById(R.id.switchThreeOne);
         switchThreeTwo = findViewById(R.id.switchThreeTwo);
         switchThreeThree = findViewById(R.id.switchThreeThree);
-        switchOneOne.setOnClickListener(this::onOnOnClick);
-        switchOneTwo.setOnClickListener(this::onOnTwClick);
-        switchOneThree.setOnClickListener(this::onOnThClick);
-        switchTwoOne.setOnClickListener(this::onTwOnClick);
-        switchTwoTwo.setOnClickListener(this::onTwTwClick);
-        switchTwoThree.setOnClickListener(this::onTwThClick);
-        switchThreeOne.setOnClickListener(this::onThOnClick);
-        switchThreeTwo.setOnClickListener(this::onThTwClick);
-        switchThreeThree.setOnClickListener(this::onThThClick);
-
+        switchOneOne.setOnClickListener(this::onClick);
+        switchOneTwo.setOnClickListener(this::onClick);
+        switchOneThree.setOnClickListener(this::onClick);
+        switchTwoOne.setOnClickListener(this::onClick);
+        switchTwoTwo.setOnClickListener(this::onClick);
+        switchTwoThree.setOnClickListener(this::onClick);
+        switchThreeOne.setOnClickListener(this::onClick);
+        switchThreeTwo.setOnClickListener(this::onClick);
+        switchThreeThree.setOnClickListener(this::onClick);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        //Checks for already logged in
         loggedIn = sharedPreferences.getBoolean("logIn", false);
-
-        Log.d("testing", String.valueOf(sharedPreferences.getBoolean("logIn", false)));
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, InfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         loginBtn = findViewById(R.id.LoginBtn);
         loginBtn.setOnClickListener(this::onClick);
+        //If already logged in go to InfoActivity
         if (loggedIn) {
             startActivity(intent);
         }
-
     }
 
     private void onClick(View view) {
-        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-        boolean checker = false;
-        for (int i = 0; i < password.length; i++) {
-            if (password[i] == sharedPreferences.getBoolean("passArray" + i, false)) {
-                checker = true;
-            } else {
-                checker = false;
+        switch (view.getId()) {
+            case R.id.LoginBtn:
+                boolean checker = false;
+                //Compares the set password to the inputted one
+                for (int i = 0; i < password.length; i++) {
+                    if (password[i] == sharedPreferences.getBoolean("passArray" + i, false)) {
+                        checker = true;
+                    } else {
+                        checker = false;
+                        break;
+                    }
+                }
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if (checker) {
+                    long unixTime = System.currentTimeMillis() / 1000;
+                    int dateInt = (int) unixTime;
+                    editor.putBoolean("logIn", true);
+                    editor.putInt("logInTime", dateInt);
+                    editor.apply();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else {
+                    editor.putBoolean("logIn", false);
+                    editor.apply();
+                    Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
+                }
                 break;
-            }
+            //Keeps track of the buttons for password input
+            case R.id.switchOneOne:
+                password[0] = !password[0];
+                break;
+            case R.id.switchOneTwo:
+                password[1] = !password[1];
+                break;
+            case R.id.switchOneThree:
+                password[2] = !password[2];
+                break;
+            case R.id.switchTwoOne:
+                password[3] = !password[3];
+                break;
+            case R.id.switchTwoTwo:
+                password[4] = !password[4];
+                break;
+            case R.id.switchTwoThree:
+                password[5] = !password[5];
+                break;
+            case R.id.switchThreeOne:
+                password[6] = !password[6];
+                break;
+            case R.id.switchThreeTwo:
+                password[7] = !password[7];
+                break;
+            case R.id.switchThreeThree:
+                password[8] = !password[8];
+                break;
         }
-        if (checker) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("logIn", true);
-            editor.apply();
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void onThThClick(View view) {
-        password[8] = !password[8];
-    }
-
-    private void onThTwClick(View view) {
-        password[7] = !password[7];
-    }
-
-    private void onThOnClick(View view) {
-        password[6] = !password[6];
-    }
-
-    private void onTwThClick(View view) {
-        password[5] = !password[5];
-    }
-
-    private void onTwTwClick(View view) {
-        password[4] = !password[4];
-    }
-
-    private void onTwOnClick(View view) {
-        password[3] = !password[3];
-    }
-
-    private void onOnThClick(View view) {
-        password[2] = !password[2];
-    }
-
-    private void onOnTwClick(View view) {
-        password[1] = !password[1];
-    }
-
-    private void onOnOnClick(View view) {
-        password[0] = !password[0];
     }
 }

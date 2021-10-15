@@ -26,7 +26,6 @@ public class SecondActivity extends AppCompatActivity {
         textEmail.setText(editEmailValue);
         textPass.setText(editPassValue);
         textNumber.setText(editNumberValue);
-
     }
 
     public void Click(View view) {
