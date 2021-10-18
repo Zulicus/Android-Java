@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Switch
+        android:id="@+id/switchSetPassOnTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassTwTw"
+        app:layout_constraintEnd_toStartOf="@+id/switchSetPassOnTh"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/switchSetPassOnOn"
+        app:layout_constraintTop_toBottomOf="@+id/toggleBtn2" />
+
+    <Switch
+        android:id="@+id/switchSetPassOnOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassTwOn"
+        app:layout_constraintEnd_toStartOf="@+id/switchSetPassOnTw"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleBtn1" />
+
+    <Switch
+        android:id="@+id/switchSetPassTwTh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassThTh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/switchSetPassTwTw"
+        app:layout_constraintTop_toBottomOf="@+id/switchSetPassOnTh" />
+
+    <Switch
+        android:id="@+id/switchSetPassThOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/applyBtn"
+        app:layout_constraintEnd_toStartOf="@+id/switchSetPassThTw"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchSetPassTwOn" />
+
+    <Switch
+        android:id="@+id/switchSetPassTwTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassThTw"
+        app:layout_constraintEnd_toStartOf="@+id/switchSetPassTwTh"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/switchSetPassTwOn"
+        app:layout_constraintTop_toBottomOf="@+id/switchSetPassOnTw" />
+
+    <Switch
+        android:id="@+id/switchSetPassOnTh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassTwTh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/switchSetPassOnTw"
+        app:layout_constraintTop_toBottomOf="@+id/toggleBtn3" />
+
+    <Switch
+        android:id="@+id/switchSetPassThTh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/applyBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/switchSetPassThTw"
+        app:layout_constraintTop_toBottomOf="@+id/switchSetPassTwTh" />
+
+    <Switch
+        android:id="@+id/switchSetPassTwOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassThOn"
+        app:layout_constraintEnd_toStartOf="@+id/switchSetPassTwTw"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchSetPassOnOn" />
+
+    <Switch
+        android:id="@+id/switchSetPassThTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/applyBtn"
+        app:layout_constraintEnd_toStartOf="@+id/switchSetPassThTh"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/switchSetPassThOn"
+        app:layout_constraintTop_toBottomOf="@+id/switchSetPassTwTw" />
+
+    <RadioGroup
+        android:id="@+id/genderGroup"
+        android:layout_width="108dp"
+        android:layout_height="143dp"
+        app:layout_constraintBottom_toTopOf="@+id/toggleBtn1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/maleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/maleBtn" />
+
+        <RadioButton
+            android:id="@+id/femaleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/femaleBtn" />
+
+        <RadioButton
+            android:id="@+id/otherGenderBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/otherGenderBtn" />
+    </RadioGroup>
+
+    <ToggleButton
+        android:id="@+id/toggleBtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassOnOn"
+        app:layout_constraintEnd_toStartOf="@+id/toggleBtn2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genderGroup" />
+
+    <ToggleButton
+        android:id="@+id/toggleBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassOnTw"
+        app:layout_constraintEnd_toStartOf="@+id/toggleBtn3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleBtn1"
+        app:layout_constraintTop_toBottomOf="@+id/genderGroup" />
+
+    <ToggleButton
+        android:id="@+id/toggleBtn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassOnTh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleBtn2"
+        app:layout_constraintTop_toBottomOf="@+id/genderGroup" />
+
+    <Button
+        android:id="@+id/applyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="@string/applyBtnText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/genderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genderTextField"
+        app:layout_constraintBottom_toTopOf="@+id/genderGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/changePasswordField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/changePassword"
+        app:layout_constraintBottom_toTopOf="@+id/switchSetPassOnTw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleBtn2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
