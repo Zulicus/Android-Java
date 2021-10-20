@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.uppgift3">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
 
@@ -17,11 +19,15 @@
         <service
             android:name=".WeatherService"
             android:enabled="true"
-            android:exported="true"></service>
-        <receiver android:process=":remote" android:name=".Alarm"></receiver>
+            android:exported="true" />
+        <receiver
+            android:name="Alarm"
+            android:process=":remote" />
+
         <activity
             android:name=".WeatherActivity"
             android:exported="false" />
+
         <activity
             android:name=".InfoActivity"
             android:exported="true" />

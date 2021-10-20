@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "446951188630",
+    "firebase_url": "https://test-83baf-default-rtdb.firebaseio.com",
+    "project_id": "test-83baf",
+    "storage_bucket": "test-83baf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446951188630:android:65b088b1aea7e1f22cbab7",
+        "android_client_info": {
+          "package_name": "com.example.lektion12"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446951188630-er858b8g5b01b0a6bhvk09op69camsci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoEG769lEPrG3rFMPcOWrJdrBR0YHek8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446951188630-er858b8g5b01b0a6bhvk09op69camsci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,12 +10,11 @@
         android:id="@+id/textViewTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
         android:text="@string/temerature"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textViewDesc"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="126dp" />
 
     <TextView
         android:id="@+id/textViewDesc"
@@ -25,5 +24,27 @@
         app:layout_constraintEnd_toStartOf="@+id/textViewTemp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="96dp" />
+        tools:layout_editor_absoluteY="126dp" />
+
+    <EditText
+        android:id="@+id/cityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/enterBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/enterBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cityBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
