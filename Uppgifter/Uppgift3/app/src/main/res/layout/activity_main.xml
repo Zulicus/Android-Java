@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/toggleBtn3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textViewTracking"
+        app:layout_constraintTop_toBottomOf="@+id/genderGroup" />
+
     <Switch
         android:id="@+id/switchSetPassOnTw"
         android:layout_width="wrap_content"
@@ -122,6 +133,7 @@
             android:id="@+id/otherGenderBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusedByDefault="true"
             android:text="@string/otherGenderBtn" />
     </RadioGroup>
 
@@ -185,4 +197,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toggleBtn2" />
+
+    <TextView
+        android:id="@+id/textViewNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notificationText"
+        app:layout_constraintBottom_toTopOf="@+id/toggleBtn1"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTracking"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genderGroup" />
+
+    <TextView
+        android:id="@+id/textViewTracking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/trackingText"
+        app:layout_constraintBottom_toTopOf="@+id/toggleBtn2"
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textViewNotification"
+        app:layout_constraintTop_toBottomOf="@+id/genderGroup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

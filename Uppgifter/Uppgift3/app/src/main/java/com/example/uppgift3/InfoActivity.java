@@ -71,7 +71,7 @@ public class InfoActivity extends AppCompatActivity {
         long unixTime = System.currentTimeMillis() / 1000;
         int dateInt = (int) unixTime;
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-        if (sharedPreferences.getInt("logInTime", 0) + 60 < dateInt) {
+        if (sharedPreferences.getInt("logInTime", 0) + 600 < dateInt) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("logIn", false);
             editor.apply();
@@ -135,7 +135,7 @@ public class InfoActivity extends AppCompatActivity {
                 startActivity(infoIntent);
                 return true;
             case R.id.homeOption:
-                Intent homeIntent = new Intent(this, MainActivity.class);
+                Intent homeIntent = new Intent(this, WeatherActivity.class);
                 homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
                 return true;

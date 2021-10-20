@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name"></string>
     <string name="logOut">Log Out</string>
-    <string name="info">Info</string>
-    <string name="home">Settings</string>
+    <string name="info">Settings</string>
+    <string name="home">Home</string>
     <string name="logIn">Log In</string>
     <string name="maleBtn">Male</string>
     <string name="femaleBtn">Female</string>
@@ -14,7 +14,11 @@
     <string name="genderMaleGreeting">Greetings Sir!</string>
     <string name="genderFemaleGreeting">Greetings Madam!</string>
     <string name="genderOtherGreeting">Greetings!</string>
-    <string name="boolGreeting">This is the state of your buttons:</string>
+    <string name="boolGreeting">These are your settings:</string>
     <string name="passwordGreeting">This is Your password:</string>
     <string name="settingsText">Change Settings</string>
+    <string name="notificationText">Notifications</string>
+    <string name="trackingText">Weather Tracking</string>
+    <string name="desctiption" />
+    <string name="temerature" />
 </resources>

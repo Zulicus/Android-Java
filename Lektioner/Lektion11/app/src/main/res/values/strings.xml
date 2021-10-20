@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Lektion11</string>
+    <string name="set_btn">Set</string>
 </resources>

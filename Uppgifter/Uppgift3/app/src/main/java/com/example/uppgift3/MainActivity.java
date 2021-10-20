@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         long unixTime = System.currentTimeMillis() / 1000;
         int dateInt = (int) unixTime;
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-        if (sharedPreferences.getInt("logInTime", 0) + 60 < dateInt) {
+        if (sharedPreferences.getInt("logInTime", 0) + 600 < dateInt) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("logIn", false);
             editor.apply();
@@ -111,38 +111,5 @@ public class MainActivity extends AppCompatActivity {
         return password[i];
     }
 
-    //Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logOutOption:
-                SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("logIn", false);
-                editor.apply();
-                Intent logIntent = new Intent(this, LoginActivity.class);
-                logIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(logIntent);
-                return true;
-            case R.id.infoOption:
-                Intent infoIntent = new Intent(this, InfoActivity.class);
-                infoIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(infoIntent);
-                return true;
-            case R.id.homeOption:
-                Intent homeIntent = new Intent(this, MainActivity.class);
-                homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(homeIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

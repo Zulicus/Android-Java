@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 public class ForegroundService extends Service {
-    public static final String NOTIFY_ID="IDChannel";
+    public static final String NOTIFY_ID = "IDChannel";
 
     public ForegroundService() {
     }
@@ -19,24 +19,24 @@ public class ForegroundService extends Service {
 
         createNotificationChannel();
 
-        Intent notiIntent = new Intent(this,MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notiIntent,0);
+        Intent notiIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notiIntent, 0);
         Notification notification = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            notification = new Notification.Builder(this,NOTIFY_ID)
+            notification = new Notification.Builder(this, NOTIFY_ID)
                     .setContentTitle("HELP")
                     .setContentText("SOS")
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentIntent(pendingIntent)
                     .build();
         }
-        startForeground(1,notification);
+        startForeground(1, notification);
 
 
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void createNotificationChannel () {
+    private void createNotificationChannel() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFY_ID, "Foreground Service", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
