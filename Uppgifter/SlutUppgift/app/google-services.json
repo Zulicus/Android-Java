@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "149929567700",
+    "project_id": "slutproject-chatt",
+    "storage_bucket": "slutproject-chatt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149929567700:android:da9e64e9c47f3a09772241",
+        "android_client_info": {
+          "package_name": "com.example.slutuppgift"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149929567700-jbt7n3qasu637l4q305ghk7aa7kome5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALXQwQFpqjU6TFuh7u9xvnWceaFLceuFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149929567700-jbt7n3qasu637l4q305ghk7aa7kome5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
