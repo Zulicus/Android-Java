@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Consumer;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -40,6 +45,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("login", false)) {
+            //correct();
+        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -53,14 +66,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DataSnapshot users : task.getResult().getChildren()) {
-                                if (users.child("email").getValue().equals(emailText.getText().toString())) {
+                                if (users.child("email").getValue().equals(emailText.getText().toString().toLowerCase())) {
                                     if (users.child("password").getValue().equals(passText.getText().toString())) {
-                                        Log.d("TAG", "onComplete: Loggin"+ users.getKey());
-                                    }
-                                }
+                                        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("user", users.getKey());
+                                        editor.putBoolean("login", true);
+                                        editor.apply();
+                                        correct();
+                                        break;
+                                    } else incorrect();
+                                } else incorrect();
                             }
-                            Log.d("TAG", "onComplete: success" + task.getResult().getChildren());
-
                         } else {
                             Log.e("TAG", "onComplete: failed", task.getException());
                         }
@@ -73,5 +90,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    private void correct() {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void incorrect() {
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("login", false);
+        editor.putString("user", "");
+        editor.apply();
+        Toast.makeText(this, "E-mail or Password is incorrect", Toast.LENGTH_SHORT).show();
     }
 }
