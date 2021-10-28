@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "149929567700",
+    "firebase_url": "https://slutproject-chatt-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "slutproject-chatt",
     "storage_bucket": "slutproject-chatt.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:149929567700:android:da9e64e9c47f3a09772241",
+        "mobilesdk_app_id": "1:149929567700:android:549c65451d8880f4772241",
         "android_client_info": {
           "package_name": "com.example.slutuppgift"
         }
