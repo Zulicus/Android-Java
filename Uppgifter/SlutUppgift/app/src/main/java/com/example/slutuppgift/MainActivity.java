@@ -71,6 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.putString("user", users.getKey());
+                                        //hardcode, change to dynamic later
+                                        if (users.getKey().toString().equals("robin")) {
+                                            editor.putString("user2", "robin2");
+                                        } else {
+                                            editor.putString("user2", "robin");
+                                        }
+                                        //end of hardcode
                                         editor.putBoolean("login", true);
                                         editor.apply();
                                         correct();
