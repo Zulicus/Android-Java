@@ -3,4 +3,5 @@
     <string name="login">Login</string>
     <string name="newUser">New User</string>
     <string name="sendBtnText">Send</string>
+    <string name="sendMessageText">Send message...</string>
 </resources>

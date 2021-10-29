@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onPostResume();
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         if (sharedPreferences.getBoolean("login", false)) {
-            correct();
+            //correct();
         }
     }
 
@@ -70,11 +70,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     if (users.child("password").getValue().equals(passText.getText().toString())) {
                                         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.putString("user", users.getKey());
                                         //hardcode, change to dynamic later
                                         if (users.getKey().toString().equals("robin")) {
                                             editor.putString("user2", "robin2");
+                                            editor.putString("user1", "robin");
                                         } else {
+                                            editor.putString("user1", "robin2");
                                             editor.putString("user2", "robin");
                                         }
                                         //end of hardcode

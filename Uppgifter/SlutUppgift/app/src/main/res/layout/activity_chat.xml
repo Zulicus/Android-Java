@@ -11,6 +11,7 @@
         android:id="@+id/sendBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:text="@string/sendBtnText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,10 +20,11 @@
 
     <EditText
         android:id="@+id/sendText"
-        android:layout_width="309dp"
-        android:layout_height="49dp"
+        android:layout_width="173dp"
+        android:layout_height="70dp"
         android:ems="10"
         android:inputType="textLongMessage|textAutoCorrect|textPersonName"
+        android:windowSoftInputMode="adjustResize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendBtn"
         app:layout_constraintHorizontal_bias="0.5"
@@ -30,11 +32,29 @@
 
     <ListView
         android:id="@+id/messageListView"
-        android:layout_width="409dp"
-        android:layout_height="680dp"
-        app:layout_constraintBottom_toTopOf="@+id/sendText"
+        android:layout_width="0dp"
+        android:layout_height="413dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messageListView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sendMessageText"
+            android:visibility="invisible" />
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
