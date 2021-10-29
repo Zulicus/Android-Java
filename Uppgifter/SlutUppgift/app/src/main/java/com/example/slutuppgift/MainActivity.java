@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onPostResume();
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         if (sharedPreferences.getBoolean("login", false)) {
-            //correct();
+            correct();
         }
     }
 
