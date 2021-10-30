@@ -3,10 +3,8 @@ package com.example.slutuppgift;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Consumer;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,12 +17,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -38,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loginBtn = findViewById(R.id.loginBtn);
-        createNewUserBtn = findViewById(R.id.createNewUserBtn);
+        createNewUserBtn = findViewById(R.id.newUserBtn);
         loginBtn.setOnClickListener(this);
         createNewUserBtn.setOnClickListener(this);
         database = FirebaseDatabase.getInstance();
@@ -92,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
                 break;
-            case R.id.createNewUserBtn:
+            case R.id.newUserBtn:
                 Log.d("TAG", "onClick: klick");
                 break;
             default:

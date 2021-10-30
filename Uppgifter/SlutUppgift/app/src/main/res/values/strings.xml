@@ -4,4 +4,8 @@
     <string name="newUser">New User</string>
     <string name="sendBtnText">Send</string>
     <string name="sendMessageText">Send message...</string>
+    <string name="enterUsername">Chose a Username</string>
+    <string name="enterEmail">Enter E-mail</string>
+    <string name="enterPassword">Set a Password</string>
+    <string name="createNewUserAndLogin">Create User and Login</string>
 </resources>

@@ -112,7 +112,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 .child(key);
         sendReferenceReceiver.child("time").setValue(time.split(":")[0] + ":" + time.split(":")[1]);
         sendReferenceReceiver.child("message").setValue(message);
-
+        sendText.setText("");
 
     }
 }
