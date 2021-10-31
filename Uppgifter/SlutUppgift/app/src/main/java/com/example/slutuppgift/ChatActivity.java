@@ -99,14 +99,12 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 + sharedPreferences.getString("user1", "");
         message = sendText.getText().toString();
         DatabaseReference sendReferenceSender = database.getReference("chat")
-                //hardcode, fix later
                 .child(sharedPreferences.getString("user1", "brokenU1"))
                 .child(sharedPreferences.getString("user2", "brokenU2"))
                 .child(key);
         sendReferenceSender.child("time").setValue(time.split(":")[0] + ":" + time.split(":")[1]);
         sendReferenceSender.child("message").setValue(message);
         DatabaseReference sendReferenceReceiver = database.getReference("chat")
-                //hardcode, fix later
                 .child(sharedPreferences.getString("user2", "brokenU2"))
                 .child(sharedPreferences.getString("user1", "brokenU1"))
                 .child(key);

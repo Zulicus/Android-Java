@@ -17,15 +17,17 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button loginBtn;
     private Button createNewUserBtn;
     private FirebaseDatabase database;
-
+    private Task<DataSnapshot> snapshotTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loginBtn.setOnClickListener(this);
         createNewUserBtn.setOnClickListener(this);
         database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("users");
+        getUsers(reference);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                getUsers(reference);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("TAG", "onCancelled: " + error);
+            }
+        });
+    }
+
+    private void getUsers(DatabaseReference reference) {
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    snapshotTask = task;
+                } else {
+                    Log.e("TAG", "onComplete: failed", task.getException());
+                }
+            }
+        });
     }
 
     @Override
@@ -54,50 +81,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.loginBtn:
                 TextView emailText = findViewById(R.id.editTextEmail);
                 TextView passText = findViewById(R.id.editTextPassword);
-                DatabaseReference reference = database.getReference("users");
-                reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DataSnapshot users : task.getResult().getChildren()) {
-                                if (users.child("email").getValue().equals(emailText.getText().toString().toLowerCase())) {
-                                    if (users.child("password").getValue().equals(passText.getText().toString())) {
-                                        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        //hardcode, change to dynamic later
-                                        if (users.getKey().toString().equals("robin")) {
-                                            editor.putString("user2", "robin2");
-                                            editor.putString("user1", "robin");
-                                        } else {
-                                            editor.putString("user1", "robin2");
-                                            editor.putString("user2", "robin");
-                                        }
-                                        //end of hardcode
-                                        editor.putBoolean("login", true);
-                                        editor.apply();
-                                        correct();
-                                        break;
-                                    } else incorrect();
-                                } else incorrect();
-                            }
-                        } else {
-                            Log.e("TAG", "onComplete: failed", task.getException());
-                        }
-                    }
-                });
+                for (DataSnapshot users : snapshotTask.getResult().getChildren()) {
+                    if (users.child("email").getValue().equals(emailText.getText().toString().toLowerCase())) {
+                        if (users.child("password").getValue().equals(passText.getText().toString())) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("user1", users.getKey());
+                            editor.putBoolean("login", true);
+                            editor.apply();
+                            Intent intent = new Intent(this, ChooseChatActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            break;
+                        } else incorrect();
+                    } else incorrect();
+                }
                 break;
             case R.id.newUserBtn:
-                Log.d("TAG", "onClick: klick");
+                Intent intent = new Intent(this, newUserActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
             default:
                 break;
         }
-    }
-
-    private void correct() {
-        Intent intent = new Intent(this, ChatActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
     }
 
     private void incorrect() {

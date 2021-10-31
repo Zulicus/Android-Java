@@ -14,8 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SlutUppgift">
         <activity
-            android:name=".newUserActivity"
+            android:name=".ChooseChatActivity"
             android:exported="false" />
+        <activity
+            android:name=".newUserActivity"
+            android:exported="false"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChatActivity"
             android:exported="false" />
