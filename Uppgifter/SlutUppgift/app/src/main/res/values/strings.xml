@@ -8,4 +8,6 @@
     <string name="enterEmail">Enter E-mail</string>
     <string name="enterPassword">Set a Password</string>
     <string name="createNewUserAndLogin">Create User and Login</string>
+    <string name="logout">Log Out</string>
+    <string name="chooseUsers">Switch Chat</string>
 </resources>

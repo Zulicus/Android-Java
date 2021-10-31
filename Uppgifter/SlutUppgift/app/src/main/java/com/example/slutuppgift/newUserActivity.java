@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class newUserActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewUserActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView usernameText;
     private TextView emailText;
     private TextView passwordText;

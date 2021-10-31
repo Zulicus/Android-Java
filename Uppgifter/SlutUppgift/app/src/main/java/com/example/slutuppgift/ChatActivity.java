@@ -3,15 +3,18 @@ package com.example.slutuppgift;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -79,6 +82,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                         listItems.add(messages.getKey().split(";")[1] + " "
                                 + messages.child("time").getValue() + ": "
                                 + messages.child("message").getValue());
+
                         adapter.notifyDataSetChanged();
                     }
                 } else {
@@ -112,5 +116,34 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         sendReferenceReceiver.child("message").setValue(message);
         sendText.setText("");
 
+    }
+
+    //Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logoutOption:
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("login", false);
+                editor.apply();
+                Intent logIntent = new Intent(this, MainActivity.class);
+                logIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(logIntent);
+                return true;
+            case R.id.chooseChatOption:
+                Intent infoIntent = new Intent(this, ChooseChatActivity.class);
+                infoIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(infoIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

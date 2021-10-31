@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onPostResume();
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         if (sharedPreferences.getBoolean("login", false)) {
-            //correct();
+            Intent intent = new Intent(this, ChooseChatActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
     }
 
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.newUserBtn:
-                Intent intent = new Intent(this, newUserActivity.class);
+                Intent intent = new Intent(this, NewUserActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;

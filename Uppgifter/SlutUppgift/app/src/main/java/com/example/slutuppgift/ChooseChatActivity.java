@@ -3,10 +3,15 @@ package com.example.slutuppgift;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -20,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ChooseChatActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChooseChatActivity extends AppCompatActivity {
     private ListView listView;
     private FirebaseDatabase database;
     private SharedPreferences sharedPreferences;
@@ -62,20 +67,61 @@ public class ChooseChatActivity extends AppCompatActivity implements View.OnClic
                 if (task.isSuccessful()) {
                     listItems.clear();
                     for (DataSnapshot users : task.getResult().getChildren()) {
-                        listItems.add(users.getKey());
-                        adapter.notifyDataSetChanged();
+                        if (!users.getKey().equals(sharedPreferences.getString("user1", ""))) {
+                            listItems.add(users.getKey());
+                            adapter.notifyDataSetChanged();
+                        }
                     }
                 } else {
                     Log.e("TAG", "onComplete: failed", task.getException());
                 }
             }
         });
-        listView.setOnItemClickListener(this);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startChat(adapterView.getItemAtPosition(i).toString());
+
+            }
+        });
 
     }
 
+    private void startChat(String user) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user2", user);
+        editor.apply();
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    //Menu
     @Override
-    public void onItemClick(View view) {
-        Log.d("TAG", "onClick: "+view);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logoutOption:
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("login", false);
+                editor.apply();
+                Intent logIntent = new Intent(this, MainActivity.class);
+                logIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(logIntent);
+                return true;
+            case R.id.chooseChatOption:
+                Intent infoIntent = new Intent(this, ChooseChatActivity.class);
+                infoIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(infoIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
