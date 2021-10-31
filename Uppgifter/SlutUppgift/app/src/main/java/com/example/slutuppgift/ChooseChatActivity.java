@@ -56,6 +56,11 @@ public class ChooseChatActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
     private void displayUsers() {
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
@@ -81,10 +86,8 @@ public class ChooseChatActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startChat(adapterView.getItemAtPosition(i).toString());
-
             }
         });
-
     }
 
     private void startChat(String user) {

@@ -97,6 +97,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user1", username);
+        editor.apply();
         Intent intent = new Intent(this, ChooseChatActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

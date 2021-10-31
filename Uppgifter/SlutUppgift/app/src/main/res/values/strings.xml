@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SlutUppgift</string>
+    <string name="app_name">Robin\'s Chat App</string>
     <string name="login">Login</string>
     <string name="newUser">New User</string>
     <string name="sendBtnText">Send</string>
@@ -10,4 +10,6 @@
     <string name="createNewUserAndLogin">Create User and Login</string>
     <string name="logout">Log Out</string>
     <string name="chooseUsers">Switch Chat</string>
+    <string name="loginPassword">Enter Password</string>
+    <string name="speakBtn">Speak</string>
 </resources>
