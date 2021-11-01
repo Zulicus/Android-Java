@@ -70,6 +70,17 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("fBase", "onCancelled: " + error);
             }
         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                toSpeech.speak(adapterView.getItemAtPosition(i).toString(), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         toSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -81,12 +92,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                toSpeech.speak(adapterView.getItemAtPosition(i).toString(), TextToSpeech.QUEUE_FLUSH, null);
-            }
-        });
+
     }
 
     @Override
@@ -189,6 +195,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
