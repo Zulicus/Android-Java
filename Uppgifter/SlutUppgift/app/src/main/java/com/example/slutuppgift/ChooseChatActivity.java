@@ -27,11 +27,11 @@ import java.util.ArrayList;
 
 public class ChooseChatActivity extends AppCompatActivity {
     private ListView listView;
-    private FirebaseDatabase database;
     private SharedPreferences sharedPreferences;
     private DatabaseReference reference;
     private ArrayList<String> listItems = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
+    private FirebaseDatabase database;
 
 
     @Override
@@ -56,10 +56,6 @@ public class ChooseChatActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-    }
 
     private void displayUsers() {
         adapter = new ArrayAdapter<String>(this,
@@ -126,5 +122,11 @@ public class ChooseChatActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.goOffline();
     }
 }

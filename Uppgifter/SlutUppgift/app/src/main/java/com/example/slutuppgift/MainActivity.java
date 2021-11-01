@@ -24,17 +24,15 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button loginBtn;
-    private Button createNewUserBtn;
-    private FirebaseDatabase database;
     private Task<DataSnapshot> snapshotTask;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loginBtn = findViewById(R.id.loginBtn);
-        createNewUserBtn = findViewById(R.id.newUserBtn);
+        Button loginBtn = findViewById(R.id.loginBtn);
+        Button createNewUserBtn = findViewById(R.id.newUserBtn);
         loginBtn.setOnClickListener(this);
         createNewUserBtn.setOnClickListener(this);
         database = FirebaseDatabase.getInstance();
@@ -116,5 +114,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("user", "");
         editor.apply();
         Toast.makeText(this, "E-mail or Password is incorrect", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.goOffline();
     }
 }

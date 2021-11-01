@@ -34,13 +34,10 @@ import java.util.Locale;
 
 
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button sendBtn;
-    private Button speakBtn;
     private TextView sendText;
     private ListView listView;
     private ArrayList<String> listItems = new ArrayList<String>();
     private ArrayAdapter<String> adapter;
-    private String message;
     private FirebaseDatabase database;
     private SharedPreferences sharedPreferences;
     private DatabaseReference reference;
@@ -50,8 +47,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        sendBtn = findViewById(R.id.sendBtn);
-        speakBtn = findViewById(R.id.speechBtn);
+        Button sendBtn = findViewById(R.id.sendBtn);
+        Button speakBtn = findViewById(R.id.speechBtn);
         sendText = findViewById(R.id.sendText);
         listView = findViewById(R.id.messageListView);
         sendBtn.setOnClickListener(this);
@@ -133,7 +130,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 String key = timestamp.toString().split("\\.")[0] + ","
                         + timestamp.toString().split("\\.")[1] + ";"
                         + sharedPreferences.getString("user1", "");
-                message = sendText.getText().toString();
+                String message = sendText.getText().toString();
                 DatabaseReference sendReferenceSender = database.getReference("chat")
                         .child(sharedPreferences.getString("user1", "brokenU1"))
                         .child(sharedPreferences.getString("user2", "brokenU2"))
@@ -191,5 +188,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.goOffline();
     }
 }

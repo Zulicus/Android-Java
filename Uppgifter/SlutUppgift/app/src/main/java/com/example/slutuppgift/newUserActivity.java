@@ -24,7 +24,6 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
     private TextView usernameText;
     private TextView emailText;
     private TextView passwordText;
-    private Button applyBtn;
     private FirebaseDatabase database;
     private Task<DataSnapshot> snapshotTask;
 
@@ -35,7 +34,7 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         usernameText = findViewById(R.id.setUsernameText);
         emailText = findViewById(R.id.setEmailText);
         passwordText = findViewById(R.id.setPasswordText);
-        applyBtn = findViewById(R.id.createNewUserBtn);
+        Button applyBtn = findViewById(R.id.createNewUserBtn);
         applyBtn.setOnClickListener(this);
         database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users");
@@ -101,5 +100,10 @@ public class NewUserActivity extends AppCompatActivity implements View.OnClickLi
         Intent intent = new Intent(this, ChooseChatActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.goOffline();
     }
 }
